@@ -1,6 +1,14 @@
 package com.parkjeongsu.modeler.domain;
 
-public class UserDefinition {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "UserDefinition")
+public class UserDefinition implements Serializable {
+    @Id
     private String userId;
     private String password;
     private String email;

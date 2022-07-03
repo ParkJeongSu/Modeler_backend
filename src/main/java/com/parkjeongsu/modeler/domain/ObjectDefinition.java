@@ -1,8 +1,18 @@
 package com.parkjeongsu.modeler.domain;
 
-public class ObjectDefinition {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "ObjectDefinition")
+public class ObjectDefinition implements Serializable {
+    @Id
     private String tableName;
+    @Id
     private String columnName;
+    @Id
     private Long position;
 
     public ObjectDefinition() {

@@ -29,7 +29,7 @@ CREATE TABLE userDefinition
     password VARCHAR2(40),
     email VARCHAR2(40),
     phoneNumber VARCHAR2(40),
-    level VARCHAR2(40), -- Admin,nomal 관리자, 일반유저
+    userLevel VARCHAR2(40), -- Admin,nomal 관리자, 일반유저
     groupName VARCHAR2(40)
 );
 
@@ -51,7 +51,7 @@ COMMENT ON
 COLUMN userDefinition.phoneNumber IS '사용자전화번호';
 
 COMMENT ON
-COLUMN userDefinition.level IS '사용자레벨';
+COLUMN userDefinition.userLevel IS '사용자레벨';
 
 COMMENT ON
 COLUMN userDefinition.groupName IS '사용자그룹이름';
@@ -61,7 +61,7 @@ COLUMN userDefinition.groupName IS '사용자그룹이름';
 CREATE TABLE menuDefinition
 (
     menuName VARCHAR2(40),
-    position NUMBER(40),
+    position NUMBER(3),
     superMenuName VARCHAR2(40)
 );
 
@@ -78,3 +78,10 @@ COLUMN menuDefinition.position IS '메뉴순서';
 
 COMMENT ON
 COLUMN menuDefinition.superMenuName IS '상위메뉴이름';
+
+-- 모델러 계정 생성 테스트
+CREATE USER modeler1 IDENTIFIED BY modeler1;
+
+GRANT CONNECT, RESOURCE, DBA TO c##modeler1;
+
+COMMIT;
