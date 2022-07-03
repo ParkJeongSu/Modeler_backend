@@ -8,8 +8,6 @@ public class ModelerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ModelerApplication.class, args);
-
-		System.out.println("test");
 	}
 
 }
