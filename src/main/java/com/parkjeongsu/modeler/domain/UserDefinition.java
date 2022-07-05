@@ -1,19 +1,31 @@
 package com.parkjeongsu.modeler.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "UserDefinition")
+@Table(name = "USERDEFINITION")
 public class UserDefinition implements Serializable {
     @Id
+    @Column(name = "USERID")
     private String userId;
+
+    @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "PHONENUMBER")
     private String phoneNumber;
+
+    @Column(name = "USERLEVEL")
     private UserLevel userLevel;
+
+    @Column(name = "GROUPNAME")
     private String groupName;
 
     public UserDefinition() {
