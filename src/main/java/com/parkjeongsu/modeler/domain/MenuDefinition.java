@@ -1,12 +1,12 @@
 package com.parkjeongsu.modeler.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.parkjeongsu.modeler.domain.IdClass.MenuID;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@IdClass(MenuID.class)
 @Table(name = "MENUDEFINITION")
 public class MenuDefinition implements Serializable {
     @Id

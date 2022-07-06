@@ -7,6 +7,6 @@ import java.util.List;
 public interface ObjectDefinitionRepository {
     ObjectDefinition create(ObjectDefinition objectDefinition);
     List<ObjectDefinition> readAll();
-    // 추후 update
-    // 추후 delete
+    ObjectDefinition update(ObjectDefinition objectDefinition);
+    boolean delete(ObjectDefinition objectDefinition);
 }

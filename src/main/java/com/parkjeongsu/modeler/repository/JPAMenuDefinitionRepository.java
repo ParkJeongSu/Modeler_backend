@@ -5,10 +5,7 @@ import com.parkjeongsu.modeler.domain.MenuDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 @Repository
@@ -16,6 +13,7 @@ public class JPAMenuDefinitionRepository implements MenuDefinitionRepository{
 
     @Autowired
     private EntityManagerFactory emf;
+
     private EntityManager em;
 
     @Override
@@ -48,8 +46,13 @@ public class JPAMenuDefinitionRepository implements MenuDefinitionRepository{
         return menuDefinition;
     }
 
+
     @Override
     public List<MenuDefinition> readAll() {
-        return null;
+        em = emf.createEntityManager();
+        String jpql = "SELECT b FROM MenuDefinition b ";
+        Query query = em.createQuery(jpql);
+        List<MenuDefinition> menuDefinitionList = query.getResultList();
+        return menuDefinitionList;
     }
 }

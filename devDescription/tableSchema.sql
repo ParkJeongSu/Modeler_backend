@@ -3,7 +3,10 @@ CREATE TABLE objectDefinition
 (
     tableName VARCHAR2(40),
     columnName VARCHAR2(40),
-    POSITION NUMBER(3)
+    POSITION NUMBER(3),
+    userFlag VARCHAR2(40),
+    dateFlag VARCHAR2(40),
+    dataType VARCHAR2(40)
 );
 
 ALTER TABLE objectDefinition ADD CONSTRAINT objectDefinition_pk PRIMARY KEY (tableName,columnName,POSITION);
@@ -19,6 +22,16 @@ COLUMN objectDefinition.columnName IS '컬럼이름';
 
 COMMENT ON
 COLUMN objectDefinition.position IS '컬럼순서';
+
+COMMENT ON
+COLUMN objectDefinition.userFlag IS '사용자id컬럼';
+
+COMMENT ON
+COLUMN objectDefinition.dateFlag IS '변경날짜flag';
+
+COMMENT ON
+COLUMN objectDefinition.dataType IS '데이터 타입';
+
 
 
 -- userDefinition

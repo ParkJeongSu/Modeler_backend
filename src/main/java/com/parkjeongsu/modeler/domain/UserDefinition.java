@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import com.parkjeongsu.modeler.domain.enumClass.UserLevel;
 
 @Entity
 @Table(name = "USERDEFINITION")
