@@ -10,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -60,6 +62,7 @@ public class JPAObjectDefinitionRepository implements ObjectDefinitionRepository
         return objectDefinitionList;
     }
 
+
     @Override
     public ObjectDefinition update(ObjectDefinition oldObjectDefinition) {
         try {
@@ -95,7 +98,6 @@ public class JPAObjectDefinitionRepository implements ObjectDefinitionRepository
 
     @Override
     public boolean delete(ObjectDefinition objectDefinition) {
-
         try {
 
             em = emf.createEntityManager();
@@ -122,5 +124,50 @@ public class JPAObjectDefinitionRepository implements ObjectDefinitionRepository
         }
 
         return false;
+    }
+
+    public List<ObjectDefinition> getObjectsByObjectName(String objectName) {
+        em = emf.createEntityManager();
+        String jpql = "SELECT b FROM ObjectDefinition b where 1=1 and b.tableName = '"+ objectName+"' ORDER BY b.position";
+        Query query = em.createQuery(jpql);
+        List<ObjectDefinition> objectDefinitionList = query.getResultList();
+        return objectDefinitionList;
+    }
+    public List<ObjectDefinition> getObjectsByObjectNameforKey(String objectName) {
+        em = emf.createEntityManager();
+        String jpql = "SELECT b FROM ObjectDefinition b where 1=1 and b.tableName = '"+ objectName+"' and keyFlag ='Y' ORDER BY b.position";
+        Query query = em.createQuery(jpql);
+        List<ObjectDefinition> objectDefinitionList = query.getResultList();
+        return objectDefinitionList;
+    }
+
+
+    public List<Object> readObjects(String objectName) {
+        List<ObjectDefinition> obl = this.getObjectsByObjectName(objectName);
+        em = emf.createEntityManager();
+
+        String sql = "SELECT * FROM "+objectName;
+
+        List<Object[]> list = em.createNativeQuery(sql).getResultList();
+        List<Object> l= new ArrayList<>();
+        for(Object[] ob : list){
+            HashMap<String ,Object> map = new HashMap<>();
+            for(int i=0;i<ob.length;i++){
+                map.put(obl.get(i).getColumnName(),ob[i]);
+            }
+            l.add(map);
+        }
+
+        return l;
+    }
+    public List<Object[]> deleteObject(String objectName, HashMap<String,Object> map){
+        List<ObjectDefinition> obl = this.getObjectsByObjectNameforKey(objectName);
+        em = emf.createEntityManager();
+
+        String sql = "SELECT * FROM "+objectName;
+
+        List<Object[]> list = em.createNativeQuery(sql).getResultList();
+
+        return list;
     }
 }

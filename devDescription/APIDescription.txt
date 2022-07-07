@@ -40,13 +40,12 @@ Response 성공시 객체List 반환
     ]
 }
 
-- 오브젝트 정보 C U D
 Post /objects/:objectName
+Put /objects/:objectName
+Delete /objects/:objectName
 
 Request
 {
-    "objectName" : ":objectName",
-    "action" : "CREATE | UPDATE | DELETE"
     "objects" :
     [
         {...},
@@ -56,7 +55,6 @@ Request
 
 Response 성공시 전체 객체List 반환
 {
-    "objectName" : ":objectName",
     objects :
     [
         {...},

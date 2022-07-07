@@ -5,12 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class JPAObjectDefinitionRepositoryTest {
 
     @Autowired
-    ObjectDefinitionRepository objectDefinitionRepository;
+    JPAObjectDefinitionRepository objectDefinitionRepository;
 
     @Test
     void create() {
@@ -19,6 +21,12 @@ class JPAObjectDefinitionRepositoryTest {
         objectDefinition.setColumnName("test");
         objectDefinition.setPosition(1L);
         objectDefinitionRepository.create(objectDefinition);
+
+        ObjectDefinition objectDefinition2 = new ObjectDefinition();
+        objectDefinition2.setTableName("test1");
+        objectDefinition2.setColumnName("test1");
+        objectDefinition2.setPosition(1L);
+        objectDefinitionRepository.create(objectDefinition2);
     }
 
     @Test
@@ -46,5 +54,26 @@ class JPAObjectDefinitionRepositoryTest {
         objectDefinition.setColumnName("test");
         objectDefinition.setPosition(1L);
         objectDefinitionRepository.delete(objectDefinition);
+    }
+
+    @Test
+    void getObjectsByObjectName() {
+        List<ObjectDefinition> tList = objectDefinitionRepository.getObjectsByObjectName("MACHINE");
+        for (ObjectDefinition t : tList) {
+            System.out.println("menuName : " + t.getTableName());
+            System.out.println("columnName : " + t.getColumnName());
+            System.out.println("position : " + t.getPosition());
+        }
+    }
+
+    @Test
+    void readObjects() {
+
+        List<Object[]> tList = objectDefinitionRepository.readObjects("MACHINE");
+        for (Object[] t : tList) {
+            for(Object o : t){
+                System.out.println(o);
+            }
+        }
     }
 }

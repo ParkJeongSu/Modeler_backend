@@ -4,6 +4,7 @@ CREATE TABLE objectDefinition
     tableName VARCHAR2(40),
     columnName VARCHAR2(40),
     POSITION NUMBER(3),
+    keyFlag VARCHAR2(40),
     userFlag VARCHAR2(40),
     dateFlag VARCHAR2(40),
     dataType VARCHAR2(40)
@@ -22,6 +23,9 @@ COLUMN objectDefinition.columnName IS '컬럼이름';
 
 COMMENT ON
 COLUMN objectDefinition.position IS '컬럼순서';
+
+COMMENT ON
+COLUMN objectDefinition.keyFlag IS '사용자id컬럼';
 
 COMMENT ON
 COLUMN objectDefinition.userFlag IS '사용자id컬럼';

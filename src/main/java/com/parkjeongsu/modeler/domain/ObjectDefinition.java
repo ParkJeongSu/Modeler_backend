@@ -20,6 +20,9 @@ public class ObjectDefinition implements Serializable {
     @Column(name = "POSITION")
     private Long position;
 
+    @Column(name = "KEYFLAG")
+    private String keyFlag;
+
     @Column(name = "USERFLAG")
     private String userFlag;
 
@@ -60,6 +63,14 @@ public class ObjectDefinition implements Serializable {
 
     public void setPosition(Long position) {
         this.position = position;
+    }
+
+    public String getKeyFlag() {
+        return keyFlag;
+    }
+
+    public void setKeyFlag(String keyFlag) {
+        this.keyFlag = keyFlag;
     }
 
     public String getUserFlag() {
