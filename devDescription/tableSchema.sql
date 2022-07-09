@@ -1,3 +1,15 @@
+-- 모델러 계정 생성 테스트
+
+alter session set "_ORACLE_SCRIPT"=true;
+
+create user modeler1 identified by modeler1;
+
+grant create session to modeler1;
+
+grant connect, resource, DBA to modeler1;
+
+alter user modeler1 default tablespace users quota unlimited on users;
+
 -- objectDefinition
 CREATE TABLE objectDefinition
 (
@@ -96,9 +108,31 @@ COLUMN menuDefinition.position IS '메뉴순서';
 COMMENT ON
 COLUMN menuDefinition.superMenuName IS '상위메뉴이름';
 
--- 모델러 계정 생성 테스트
-CREATE USER modeler1 IDENTIFIED BY modeler1;
 
-GRANT CONNECT, RESOURCE, DBA TO c##modeler1;
 
-COMMIT;
+-- 여기서 부턴 관리테이블
+
+CREATE TABLE MACHINE
+(
+	FACTORYNAME VARCHAR2(40),
+    MACINHNAME VARCHAR2(40),
+    MACHINESPECNAME VARCHAR2(40),
+    MACHINEGROUPNAME VARCHAR2(40)
+);
+
+ALTER TABLE MACHINE ADD CONSTRAINT MACHINE_pk PRIMARY KEY (FACTORYNAME,MACINHNAME);
+
+COMMENT ON
+TABLE MACHINE IS '설비';
+
+COMMENT ON
+COLUMN MACHINE.FACTORYNAME IS '샵이름';
+
+COMMENT ON
+COLUMN MACHINE.MACINHNAME IS '설비명';
+
+COMMENT ON
+COLUMN MACHINE.MACHINESPECNAME IS '설비스펙';
+
+COMMENT ON
+COLUMN MACHINE.MACHINEGROUPNAME IS '설비그룹';

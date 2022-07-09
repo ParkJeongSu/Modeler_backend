@@ -1,5 +1,6 @@
 package com.parkjeongsu.modeler.controller;
 
+import com.parkjeongsu.modeler.domain.ObjectDefinition;
 import com.parkjeongsu.modeler.domain.UserDefinition;
 import com.parkjeongsu.modeler.service.MenuService;
 import com.parkjeongsu.modeler.service.ObjectService;
@@ -33,5 +34,14 @@ public class ObjectDefinitionController {
         return map;
     }
 
+
+    @PostMapping("objectsInfo/{objectName}")
+    @ResponseBody
+    public HashMap<String,Object> setObjectsInfo(@PathVariable("objectName") String objectName){
+        HashMap<String,Object> map =new HashMap<>();
+        List<ObjectDefinition> objList = objectService.setObjectInfo(objectName);
+        map.put("objects",objList);
+        return map;
+    }
 
 }

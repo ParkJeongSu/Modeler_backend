@@ -68,12 +68,10 @@ class JPAObjectDefinitionRepositoryTest {
 
     @Test
     void readObjects() {
-
-        List<Object[]> tList = objectDefinitionRepository.readObjects("MACHINE");
-        for (Object[] t : tList) {
-            for(Object o : t){
-                System.out.println(o);
-            }
-        }
+        List<Object> tList = objectDefinitionRepository.readObjects("MACHINE");
+    }
+    @Test
+    void setObjectInfo() {
+        objectDefinitionRepository.setObjectInfo("machine");
     }
 }

@@ -170,4 +170,38 @@ public class JPAObjectDefinitionRepository implements ObjectDefinitionRepository
 
         return list;
     }
+
+    public List<ObjectDefinition> setObjectInfo(String objectName){
+        em = emf.createEntityManager();
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT ");
+        sb.append("	A.TABLE_NAME , ");
+        sb.append("	A.COLUMN_NAME , ");
+        sb.append("	A.DATA_TYPE , ");
+        sb.append("	A.COLUMN_ID , ");
+        sb.append("	NVL2(C.CONSTRAINT_TYPE,'Y','N')  ");
+        sb.append("FROM ");
+        sb.append("	ALL_TAB_COLUMNS A ");
+        sb.append("	LEFT OUTER JOIN ALL_CONS_COLUMNS B ON A.OWNER =B.OWNER AND A.TABLE_NAME =B.TABLE_NAME AND A.COLUMN_NAME = B.COLUMN_NAME ");
+        sb.append("	LEFT OUTER JOIN ALL_CONSTRAINTS C ON B.TABLE_NAME = C.TABLE_NAME AND B.CONSTRAINT_NAME =C.CONSTRAINT_NAME AND C.CONSTRAINT_TYPE ='P' ");
+        sb.append("WHERE ");
+        sb.append("	1=1 ");
+        sb.append("	AND A.TABLE_NAME = UPPER ('" + objectName +"') ");
+        String jpql = sb.toString();
+
+        List<Object[]> list = em.createNativeQuery(jpql).getResultList();
+        List<ObjectDefinition> objectDefinitionList = new ArrayList<>();
+        for(Object[] o : list){
+            ObjectDefinition objectDefinition = new ObjectDefinition();
+            objectDefinition.setTableName(o[0].toString());
+            objectDefinition.setColumnName(o[1].toString());
+            objectDefinition.setPosition( Long.parseLong(o[3].toString()) );
+            objectDefinition.setDataType(o[2].toString());
+            objectDefinition.setKeyFlag(o[4].toString());
+            this.create(objectDefinition);
+            objectDefinitionList.add(objectDefinition);
+        }
+
+        return objectDefinitionList;
+    }
 }

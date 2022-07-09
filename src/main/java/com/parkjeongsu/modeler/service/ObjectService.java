@@ -19,5 +19,9 @@ public class ObjectService {
         return jpaObjectDefinitionRepository.readObjects(objectName);
     }
 
+    public List<ObjectDefinition> setObjectInfo(String objectName){
+        return jpaObjectDefinitionRepository.setObjectInfo(objectName);
+    }
+
 
 }
