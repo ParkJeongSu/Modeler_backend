@@ -58,17 +58,17 @@ class JPAObjectDefinitionRepositoryTest {
 
     @Test
     void getObjectsByObjectName() {
-        List<ObjectDefinition> tList = objectDefinitionRepository.getObjectsByObjectName("MACHINE");
-        for (ObjectDefinition t : tList) {
-            System.out.println("menuName : " + t.getTableName());
-            System.out.println("columnName : " + t.getColumnName());
-            System.out.println("position : " + t.getPosition());
-        }
+//        List<ObjectDefinition> tList = objectDefinitionRepository.getObjectsByObjectName("MACHINE");
+//        for (ObjectDefinition t : tList) {
+//            System.out.println("menuName : " + t.getTableName());
+//            System.out.println("columnName : " + t.getColumnName());
+//            System.out.println("position : " + t.getPosition());
+//        }
     }
 
     @Test
     void readObjects() {
-        List<Object> tList = objectDefinitionRepository.readObjects("MACHINE");
+        //List<Object> tList = objectDefinitionRepository.readObjects("MACHINE");
     }
     @Test
     void setObjectInfo() {
